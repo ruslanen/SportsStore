@@ -1,0 +1,23 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link rel="stylesheet"
+          asp-href-include="/lib/bootstrap/dist/**/*.min.css"
+          asp-href-exclude="**/*-reboot*,**/*-grid*" />
+    <title>SportsStore</title>
+</head>
+<body>
+    <div class="navbar navbar-light bg-light" role="navigation">
+        <a class="navbar-brand" href="#">Sports Store</a>
+    </div>
+    <div class="row m-1 p-1">
+        <div id="categories" class="col-3">
+            todo
+        </div>
+    </div>
+    <div class="col-9">
+        @RenderBody()
+    </div>
+</body>
+</html> 

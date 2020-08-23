@@ -1,0 +1,10 @@
+﻿@model ProductsListViewModel
+@foreach (var p in Model.Products)
+{
+    @await Html.PartialAsync("ProductSummary", p)
+}
+<page-link page-model="@Model.PagingInfo" page-action="List" page-classes-enabled="true"
+           page-class="btn" page-class-normal="btn-secondary"
+           page-class-selected="btn-primary" class="btn-group pull-right m1">
+</page-link>
+
