@@ -13,11 +13,11 @@
     </div>
     <div class="row m-1 p-1">
         <div id="categories" class="col-3">
-            todo
+            @await Component.InvokeAsync("NavigationMenu")
         </div>
-    </div>
-    <div class="col-9">
-        @RenderBody()
+        <div class="col-9">
+            @RenderBody()
+        </div>
     </div>
 </body>
 </html> 

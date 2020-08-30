@@ -30,6 +30,8 @@ namespace SportsStore
                 this.Configuration["Data:SportsStoreProducts:ConnectionString"]));
             services.AddTransient<IProductRepository, EFProductRepository>();
             services.AddMvc(option => option.EnableEndpointRouting = false);
+            services.AddMemoryCache();
+            services.AddSession();
         }
 
         // Используется для настройки средств, которые получают и обрабатывают HTTP-запросы 
@@ -41,13 +43,24 @@ namespace SportsStore
             app.UseStatusCodePages();
             // Включает поддержку для обслуживания статического содержимого из папки wwwroot
             app.UseStaticFiles();
+            app.UseSession();
             // Включает инфраструктуру MVC
             app.UseMvc(routes =>
             {
                 routes.MapRoute(
-                    name: "pagination",
-                    template: "Products/Page{productPage}",
-                    defaults: new { Controller = "Product", action = "List" }
+                    name: null,
+                    template: "{category}/Page{productPage:int}",
+                    defaults: new { Controller = "Product", Action = "List" }
+                );
+                routes.MapRoute(
+                    name: null,
+                    template: "Page{productPage:int}",
+                    defaults: new { Controller = "Product", Action = "List", ProductPage = 1 }
+                );
+                routes.MapRoute(
+                    name: "null",
+                    template: "",
+                    defaults: new { Controller = "Product", Action = "List", ProductPage = 1 }
                 );
                 routes.MapRoute(
                     "default",

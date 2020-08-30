@@ -1,4 +1,5 @@
-﻿@model Product
+﻿@using SportsStore.Infrastructure
+@model Product
 <div class="card card-outline-primary m-1 р-1">
     <div class="bg-faded р-1">
         <h4>
@@ -9,4 +10,16 @@
         </h4>
     </div>
     <div class="card-text p-l">@Model.Description</div>
+    <form id="@Model.ProductId" asp-action="AddToCart"
+          asp-controller="Cart" method="post">
+        <input type="hidden" asp-for="ProductId" />
+        <input type="hidden" name="returnUtl" 
+               value="@ViewContext.HttpContext.Request.PathAndQuery()"/>
+        <span class="card-text p-1">
+            @Model.Description
+            <button type="submit" class="btn btn-success btn-sm" style="float:right">
+                Add To Cart
+            </button>
+        </span>
+    </form>
 </div> 
